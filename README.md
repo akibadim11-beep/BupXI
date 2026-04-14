@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUP Law 11th Batch | Bangladesh University of Professionals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap');
+        
+        :root {
+            --primary: #0A2540;
+            --accent: #C5A05B;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .heading-font {
+            font-family: 'Playfair Display', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%);
+        }
+        
+        .navbar {
+            backdrop-filter: blur(20px);
+        }
+        
+        /* Premium Enhanced Card Animation */
+        .card {
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            transform: translateY(50px) scale(0.92);
+            box-shadow: 0 15px 35px -10px rgb(10 37 64 / 0.25);
+        }
+        
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-22px) scale(1.08) rotate(1.5deg);
+            box-shadow: 0 45px 90px -20px rgb(197 160 91 / 0.45),
+                        0 0 0 8px rgba(197, 160, 91, 0.2);
+            border-color: #C5A05B;
+        }
+        
+        .card .inner-content {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .card:hover .inner-content {
+            transform: scale(1.04);
+        }
+        
+        .dark-card {
+            background: rgba(255,255,255,0.085);
+            backdrop-filter: blur(22px);
+            border: 1px solid rgba(197, 160, 91, 0.3);
+        }
+        
+        .search-input {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .search-input:focus {
+            box-shadow: 0 0 0 6px rgba(197, 160, 91, 0.3);
+            border-color: #C5A05B;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="navbar bg-[#0A2540]/95 border-b border-[#C5A05B]/30 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-[#C5A05B] rounded-3xl flex items-center justify-center text-3xl shadow-inner">⚖️</div>
+                <div>
+                    <h1 class="heading-font text-3xl font-bold text-white tracking-[-1px]">BUP LAW</h1>
+                    <p class="text-[#C5A05B] text-sm -mt-1 font-medium">equity eleven</p>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-white font-medium">
+                <a href="#home" onclick="smoothScroll('home')" class="hover:text-[#C5A05B]">Home</a>
+                <a href="#section-a" onclick="smoothScroll('section-a')" class="hover:text-[#C5A05B]">Section A</a>
+                <a href="#section-b" onclick="smoothScroll('section-b')" class="hover:text-[#C5A05B]">Section B</a>
+                <a href="#quotations" onclick="smoothScroll('quotations')" class="hover:text-[#C5A05B]">Legal Wisdom</a>
+            </div>
+
+            <!-- Global Search -->
+            <div class="hidden md:flex items-center w-80">
+                <div class="relative flex-1">
+                    <input 
+                        type="text" 
+                        id="globalSearch"
+                        onkeyup="handleGlobalSearch()"
+                        placeholder="Search any student name..." 
+                        class="search-input w-full text-white placeholder:text-white/60 bg-white/10 border border-white/30 focus:border-[#C5A05B] rounded-3xl px-6 py-3 text-base outline-none pl-12">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-white/60"></i>
+                </div>
+            </div>
+
+            <!-- Social Links + BUP Button -->
+            <div class="flex items-center gap-4">
+                <a href="https://www.facebook.com/share/1Aq9r2m8Xf/?mibextid=wwXIfr" 
+                   target="_blank" 
+                   class="text-white hover:text-[#C5A05B] text-2xl">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/buplawxi?igsh=MXJ3NjNxb29qa2hocA==" 
+                   target="_blank" 
+                   class="text-white hover:text-[#C5A05B] text-2xl">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                
+                <a href="https://bup.edu.bd" target="_blank" 
+                   class="hidden sm:flex px-6 py-3 bg-[#C5A05B] hover:bg-white hover:text-[#0A2540] font-semibold rounded-3xl text-sm items-center gap-2">
+                    <i class="fas fa-university"></i> OFFICIAL BUP
+                </a>
+                
+                <button onclick="toggleMobileMenu()" class="md:hidden w-11 h-11 flex items-center justify-center text-white bg-white/10 hover:bg-[#C5A05B] hover:text-[#0A2540] rounded-2xl text-2xl">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#0A2540] border-t border-[#C5A05B]/20 px-6 py-6">
+            <div class="relative mb-6">
+                <input 
+                    type="text" 
+                    id="mobileGlobalSearch"
+                    onkeyup="handleGlobalSearch(); if(event.key === 'Enter') toggleMobileMenu();"
+                    placeholder="Search student name..." 
+                    class="search-input w-full text-white placeholder:text-white/60 bg-white/10 border border-white/30 rounded-3xl px-6 py-4 text-base outline-none pl-12">
+                <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-white/60"></i>
+            </div>
+            <div class="flex flex-col gap-4 text-white font-medium">
+                <a href="#home" onclick="smoothScroll('home');toggleMobileMenu()" class="py-3 px-4 hover:bg-white/10 rounded-2xl">🏠 Home</a>
+                <a href="#section-a" onclick="smoothScroll('section-a');toggleMobileMenu()" class="py-3 px-4 hover:bg-white/10 rounded-2xl">Section A</a>
+                <a href="#section-b" onclick="smoothScroll('section-b');toggleMobileMenu()" class="py-3 px-4 hover:bg-white/10 rounded-2xl">Section B</a>
+                <a href="#quotations" onclick="smoothScroll('quotations');toggleMobileMenu()" class="py-3 px-4 hover:bg-white/10 rounded-2xl">Legal Wisdom</a>
+            </div>
+            
+            <!-- Social Links in Mobile Menu -->
+            <div class="mt-8 pt-6 border-t border-white/20 flex gap-6 justify-center">
+                <a href="https://www.facebook.com/share/1Aq9r2m8Xf/?mibextid=wwXIfr" 
+                   target="_blank" 
+                   class="text-3xl text-white hover:text-[#C5A05B]">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/buplawxi?igsh=MXJ3NjNxb29qa2hocA==" 
+                   target="_blank" 
+                   class="text-3xl text-white hover:text-[#C5A05B]">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <h1 class="heading-font text-6xl md:text-7xl font-bold text-white leading-none tracking-[-2px]">
+                    BUP LAW<br>XI
+                </h1>
+                <p class="text-2xl text-[#C5A05B]">Department of Law • Bangladesh University of Professionals</p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#section-a" onclick="smoothScroll('section-a')" 
+                       class="px-8 py-4 bg-white text-[#0A2540] font-semibold rounded-3xl flex items-center gap-2 hover:shadow-2xl">
+                        <i class="fas fa-users"></i> SECTION A
+                    </a>
+                    <a href="#section-b" onclick="smoothScroll('section-b')" 
+                       class="px-8 py-4 border-2 border-white text-white font-semibold rounded-3xl hover:bg-white hover:text-[#0A2540]">
+                        SECTION B
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION A -->
+    <section id="section-a" class="py-20 bg-[#0A2540] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="bg-[#C5A05B] text-[#0A2540] px-8 py-3 rounded-3xl text-sm font-semibold tracking-widest">SECTION A</span>
+                    <h2 class="heading-font text-5xl font-bold text-white mt-4">The Visionaries</h2>
+                </div>
+                
+                <div class="relative w-full md:w-96">
+                    <input 
+                        type="text" 
+                        id="searchA"
+                        onkeyup="filterSectionA()"
+                        placeholder="Search name in Section A..." 
+                        class="search-input w-full bg-white/10 border border-white/30 focus:border-[#C5A05B] text-white rounded-3xl px-6 py-4 text-lg outline-none pl-12 placeholder:text-white/60">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-white/60"></i>
+                </div>
+            </div>
+            
+            <div id="sectionAGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- JS populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION B -->
+    <section id="section-b" class="py-20 bg-[#0A2540] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="bg-[#C5A05B] text-[#0A2540] px-8 py-3 rounded-3xl text-sm font-semibold tracking-widest">SECTION B</span>
+                    <h2 class="heading-font text-5xl font-bold text-white mt-4">The Guardians of Justice</h2>
+                </div>
+                
+                <div class="relative w-full md:w-96">
+                    <input 
+                        type="text" 
+                        id="searchB"
+                        onkeyup="filterSectionB()"
+                        placeholder="Search name or roll in Section B..." 
+                        class="search-input w-full bg-white/10 border border-white/30 focus:border-[#C5A05B] text-white rounded-3xl px-6 py-4 text-lg outline-none pl-12 placeholder:text-white/60">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-white/60"></i>
+                </div>
+            </div>
+            
+            <div id="sectionBGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- JS populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotations -->
+    <section id="quotations" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold text-[#0A2540] mb-16">Legal Wisdom</h2>
+            
+            <div class="space-y-16">
+                <div>
+                    <p class="text-3xl italic text-gray-700">"The end of law is not to abolish or restrain, but to preserve and enlarge freedom."</p>
+                    <p class="mt-8 text-[#C5A05B] font-semibold">— John Locke</p>
+                </div>
+                <div>
+                    <p class="text-3xl italic text-gray-700">"Justice is the constant and perpetual will to render to every man his due."</p>
+                    <p class="mt-8 text-[#C5A05B] font-semibold">— Justinian I</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0A2540] text-white/70 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-lg">Department of Law • Bangladesh University of Professionals</p>
+            <p class="mt-2 text-sm">BUP Law 11th Batch © 2026 • Designed by Akib Al Azad</p>
+            
+            <!-- Social Links in Footer -->
+            <div class="flex justify-center gap-8 mt-8 text-3xl">
+                <a href="https://www.facebook.com/share/1Aq9r2m8Xf/?mibextid=wwXIfr" 
+                   target="_blank" 
+                   class="hover:text-[#C5A05B]">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/buplawxi?igsh=MXJ3NjNxb29qa2hocA==" 
+                   target="_blank" 
+                   class="hover:text-[#C5A05B]">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Section A Students
+        const sectionAStudents = [
+            "Akib", "Shuvo", "Jihad", "Daiyan", "Siyam", "Abonto", "Nazia", "Meem", "Urmy", "Irtiza",
+            "Mazuza", "Jessica", "Nowrin", "Shoshi", "Labiba", "Bristy", "Rubaiya", "Humayra",
+            "Khatija", "Khadija", "Nafiza", "Konika", "Ayesha", "Ilma", "Tabassum", "Shereya",
+            "Adrita", "Samiha", "Sinha", "Habiba", "Arifin", "Adnan", "Hridoy", "Rouf", "Rafid",
+            "Riyad", "Likhon", "Rafii", "Rezowan", "Arman", "Rabbi", "Fahim", "Plabon",
+            "Sadia", "Nazia", "Meem", "Jawad", "Siyam", "Shreya", "Shabnaj", "Sinha", "Saima","Faiyaz",
+        ];
+
+        // Section B Students
+        const sectionBStudents = [
+            {sl:1, roll:"25429510018", name:"MD. ABU RAYHAN"},
+            {sl:2, roll:"25429510034", name:"KABERI HALDER"},
+            {sl:3, roll:"26429511006", name:"TASPIA BINTI ISLAM PRIONTY"},
+            {sl:4, roll:"26429511008", name:"TASFIA ZAMAN"},
+            {sl:5, roll:"26429511010", name:"MD. SHAH RIYER RAJ"},
+            {sl:6, roll:"26429511014", name:"EKRAMUL HUQ ISHMAM"},
+            {sl:7, roll:"26429511016", name:"ZARIN SABAH"},
+            {sl:8, roll:"26429511018", name:"SHADMAN REZOWAN"},
+            {sl:9, roll:"26429511020", name:"TABASSUM KADER MYSHA"},
+            {sl:10, roll:"26429511022", name:"SARA AKBAR"},
+            {sl:11, roll:"26429511024", name:"MOSFIK ZAMAN MIAH"},
+            {sl:12, roll:"26429511026", name:"MD. MAHMUDUL HASAN"},
+            {sl:13, roll:"26429511028", name:"TAHMIDA SANJIM"},
+            {sl:14, roll:"26429511030", name:"MD. TAWFIQUR RAHMAN TALHA"},
+            {sl:15, roll:"26429511034", name:"SHEIKH RIFAT"},
+            {sl:16, roll:"26429511036", name:"MD. ABIR CHOWDHURY RAFIU"},
+            {sl:17, roll:"26429511038", name:"ANJUMAN FERDOUSI TASFIA"},
+            {sl:18, roll:"26429511040", name:"IMTIAZ UDDIN AHMED CHOWDHURY"},
+            {sl:19, roll:"26429511042", name:"TAMASSUM TAHARAT"},
+            {sl:20, roll:"26429511044", name:"MST. FATEMA JANNAT MAHI"},
+            {sl:21, roll:"26429511048", name:"JARIF AL ARAF"},
+            {sl:22, roll:"26429511050", name:"SIMU AKTER"},
+            {sl:23, roll:"26429511052", name:"SAYED MOHAMMED NAIMUR RAHMAN"},
+            {sl:24, roll:"26429511054", name:"MD. AKIBUL HASAN"},
+            {sl:25, roll:"26429511056", name:"TASMIM ALAM OTHOY"},
+            {sl:26, roll:"26429511058", name:"KHALID BIN HOSSAIN"},
+            {sl:27, roll:"26429511060", name:"TAHSIN MOHAMMAD DIP"},
+            {sl:28, roll:"26429511062", name:"MD. RIYAZ RABBI KALLOL"},
+            {sl:29, roll:"26429511064", name:"TAYEBA TABASSUM"},
+            {sl:30, roll:"26429511066", name:"ANGELINA CHING CHING"},
+            {sl:31, roll:"26429511068", name:"MD. SHAHIN ALAM"},
+            {sl:32, roll:"26429511070", name:"MD. JUBAYER SADIK"},
+            {sl:33, roll:"26429511072", name:"SARA ANOWAR SIDDIKA"},
+            {sl:34, roll:"26429511074", name:"TASHFIA NOOR DISHI"},
+            {sl:35, roll:"26429511076", name:"SYEDA SADIA TASNIM"},
+            {sl:36, roll:"26429511078", name:"MD. MUNTASHEER MAHMUD MURAD"},
+            {sl:37, roll:"26429511080", name:"MAHZUJA MAHIRA"},
+            {sl:38, roll:"26429511082", name:"AFIA JAHAN OYSHEE"},
+            {sl:39, roll:"26429511084", name:"AFIA FARZANA JHUMA"},
+            {sl:40, roll:"26429511086", name:"MST. NAURIN AZAD ATHAY"},
+            {sl:41, roll:"26429511088", name:"NISHAT TASNIM"},
+            {sl:42, roll:"26429511090", name:"FAHMI FAIROOZ"},
+            {sl:43, roll:"26429511092", name:"SADIA ISLAM SHANTA"},
+            {sl:44, roll:"26429511094", name:"METHILA FARJANA DOLA"},
+            {sl:45, roll:"26429511096", name:"SABIKUN NAHAR"},
+            {sl:46, roll:"26429511098", name:"RUPREKHA TASMI ESHA"},
+            {sl:47, roll:"26429511102", name:"MAHMUDUL HASAN DIP"},
+            {sl:48, roll:"26429511104", name:"RIFAT UL ALAM"},
+            {sl:49, roll:"26429511106", name:"SHAMIA SHIRIN SHILA"},
+            {sl:50, roll:"26429511108", name:"MD. ABDULLAH AL NOMAN SARKAR"},
+            {sl:51, roll:"26429511110", name:"ZANNATUL FERDOWS HANIFA"},
+            {sl:52, roll:"26429511114", name:"MD. NAYEM HASAN MARUF"},
+            {sl:53, roll:"26429511116", name:"MD. SHAMSUDDIN AHMED"},
+            {sl:54, roll:"26429511118", name:"SHANJANA AFROJA MITHI"}
+        ];
+
+        function createCard(name, isB = false, sl = "", roll = "") {
+            const card = document.createElement('div');
+            card.className = `card dark-card rounded-3xl p-7 text-white`;
+            
+            if (isB) {
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-5">
+                        <span class="text-xs bg-white/20 px-4 py-1 rounded-3xl">${sl}</span>
+                        <span class="text-[#C5A05B] text-sm font-mono">${roll}</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold leading-tight">${name}</h4>
+                    <div class="mt-8 text-xs flex items-center gap-2 text-white/70">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>BUP LAW 11TH BATCH</span>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="mb-5">
+                        <span class="text-xs bg-white/20 px-4 py-1 rounded-3xl">Section A</span>
+                    </div>
+                    <h4 class="text-2xl font-semibold leading-tight">${name}</h4>
+                    <div class="mt-8 text-xs flex items-center gap-2 text-white/70">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>BUP LAW 11TH BATCH</span>
+                    </div>
+                `;
+            }
+            return card;
+        }
+
+        function renderSectionA(filtered = null) {
+            const grid = document.getElementById('sectionAGrid');
+            grid.innerHTML = '';
+            const list = filtered || sectionAStudents;
+            list.forEach((name, i) => {
+                const card = createCard(name);
+                grid.appendChild(card);
+                setTimeout(() => card.classList.add('visible'), 30 + i * 25);
+            });
+        }
+
+        function renderSectionB(filtered = null) {
+            const grid = document.getElementById('sectionBGrid');
+            grid.innerHTML = '';
+            const list = filtered || sectionBStudents;
+            list.forEach((s, i) => {
+                const card = createCard(s.name, true, s.sl, s.roll);
+                grid.appendChild(card);
+                setTimeout(() => card.classList.add('visible'), 30 + i * 25);
+            });
+        }
+
+        function filterSectionA() {
+            const q = document.getElementById('searchA').value.toLowerCase().trim();
+            if (!q) return renderSectionA();
+            const filtered = sectionAStudents.filter(n => n.toLowerCase().includes(q));
+            renderSectionA(filtered);
+        }
+
+        function filterSectionB() {
+            const q = document.getElementById('searchB').value.toLowerCase().trim();
+            if (!q) return renderSectionB();
+            const filtered = sectionBStudents.filter(s => 
+                s.name.toLowerCase().includes(q) || s.roll.includes(q)
+            );
+            renderSectionB(filtered);
+        }
+
+        function handleGlobalSearch() {
+            const input = document.getElementById('globalSearch') || document.getElementById('mobileGlobalSearch');
+            const q = input ? input.value.toLowerCase().trim() : '';
+            
+            if (!q) {
+                renderSectionA();
+                renderSectionB();
+                return;
+            }
+            
+            const filteredA = sectionAStudents.filter(n => n.toLowerCase().includes(q));
+            const gridA = document.getElementById('sectionAGrid');
+            gridA.innerHTML = '';
+            filteredA.forEach((name, i) => {
+                const card = createCard(name);
+                gridA.appendChild(card);
+                setTimeout(() => card.classList.add('visible'), 30 + i * 25);
+            });
+            
+            const filteredB = sectionBStudents.filter(s => 
+                s.name.toLowerCase().includes(q) || s.roll.includes(q)
+            );
+            const gridB = document.getElementById('sectionBGrid');
+            gridB.innerHTML = '';
+            filteredB.forEach((s, i) => {
+                const card = createCard(s.name, true, s.sl, s.roll);
+                gridB.appendChild(card);
+                setTimeout(() => card.classList.add('visible'), 30 + i * 25);
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+
+        function smoothScroll(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize
+        window.onload = () => {
+            renderSectionA();
+            renderSectionB();
+            
+            console.log('%c✅ BUP Law 11th Batch Professional Website Updated with Facebook & Instagram Links', 
+                        'background:#C5A05B;color:#0A2540;padding:8px 12px;border-radius:8px;font-weight:bold');
+        };
+    </script>
+</body>
+</html>
